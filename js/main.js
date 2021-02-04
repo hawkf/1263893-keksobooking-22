@@ -7,6 +7,7 @@ function getRandomIntInclusive(min, max) {
   if (min < 0) {
     // eslint-disable-next-line no-console
     console.log('Введен не верный диапазон');
+    return null;
   }
 
   return Math.floor(Math.random() * (max - min + 1) + min);
@@ -20,6 +21,7 @@ function getRandomFloatInclusive(min, max, decimalNumber) {
   if (min < 0) {
     // eslint-disable-next-line no-console
     console.log('Введен не верный диапазон');
+    return null;
   }
 
   return  parseFloat((Math.random() * (max - min + 1) + min).toFixed(decimalNumber));
