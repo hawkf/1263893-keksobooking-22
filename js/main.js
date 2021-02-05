@@ -42,7 +42,7 @@ const X_COORDINATES = {
 };
 const Y_COORDINATES = {
   min: 139.70000,
-  max: 35.70000,
+  max: 139.80000,
   decimalNumber: 5,
 }
 const ROOMS = [1, 2, 3, 5, 6];
@@ -68,17 +68,17 @@ let createRandomArray = function(array) {
 
   return randomArray;
 }
-let getLocation = function() {
-  return {
-    x: getRandomFloatInclusive(X_COORDINATES.min, X_COORDINATES.max, X_COORDINATES.decimalNumber),
-    y: getRandomFloatInclusive(Y_COORDINATES.min, Y_COORDINATES.max, Y_COORDINATES.decimalNumber),
-  };
-}
+
 let createOffer = function() {
+  let locationX = getRandomFloatInclusive(X_COORDINATES.min, X_COORDINATES.max, X_COORDINATES.decimalNumber);
+  let locationY = getRandomFloatInclusive(Y_COORDINATES.min, Y_COORDINATES.max, Y_COORDINATES.decimalNumber);
   return {
     title: 'Rent out' + this.type,
-    location: getLocation(),
-    address: '' + this.location.x + ', ' + this.location.y,
+    location: {
+      x: locationX,
+      y: locationY,
+    },
+    address: '' + locationX + ', ' + locationY,
     price: Math.random(),
     type: HOUSE_TYPE[getArrayIndex(HOUSE_TYPE)],
     rooms: ROOMS[getArrayIndex(ROOMS)],
