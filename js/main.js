@@ -10,7 +10,7 @@ const Y_COORDINATES = {
   max: 139.80000,
   decimalNumber: 5,
 }
-const CHECK_IN_OUT = ['12:00', '13:00', '14:00'];
+const TIMES = ['12:00', '13:00', '14:00'];
 const FEATURES = ['wifi', 'dishwasher', 'parking', 'washer', 'elevator', 'conditioner'];
 const PHOTOS = ['http://o0.github.io/assets/images/tokyo/hotel1.jpg', 'http://o0.github.io/assets/images/tokyo/hotel2.jpg', 'http://o0.github.io/assets/images/tokyo/hotel3.jpg']
 
@@ -52,16 +52,18 @@ const getRandomArrayElement = function(array) {
   return array[getRandomIntInclusive(0, array.length - 1)];
 }
 
-const shuffle = function (array) {
-  for (let i = array.length - 1; i > 0; i--) {
-    let j = Math.floor(Math.random() * (i + 1)); // случайный индекс от 0 до i
-    [array[i], array[j]] = [array[j], array[i]];
+const shuffle = function (arrayElements) {
+  const results  = arrayElements.slice();
+  for (let i = results.length - 1; i > 0; i--) {
+
+    const j = Math.floor(Math.random() * (i + 1)); // случайный индекс от 0 до i
+    [results[i], results[j]] = [results[j], results[i]];
   }
-  return array;
+  return results;
 }
 const createAuthor = function() {
   return {
-    avatar: 'img/avatars/user' + '0' + getRandomIntInclusive(1, 8) + '.png',
+    avatar: 'img/avatars/user0' + getRandomIntInclusive(1, 8) + '.png',
   }
 };
 
@@ -80,8 +82,8 @@ const createOffer = function() {
     type: getRandomArrayElement(HOUSE_TYPE),
     rooms: getRandomIntInclusive(1, 6),
     guests: getRandomIntInclusive(0, 100),
-    checkin: getRandomArrayElement(CHECK_IN_OUT),
-    checkout: getRandomArrayElement(CHECK_IN_OUT),
+    checkin: getRandomArrayElement(TIMES),
+    checkout: getRandomArrayElement(TIMES),
     features: shuffle(FEATURES).slice(getRandomIntInclusive(0, FEATURES.length - 1)),
     description: 'Есть все удобства. Прекрасная транспортная развязка',
     photos: shuffle(PHOTOS).slice(getRandomIntInclusive(0, PHOTOS.length - 1)),
@@ -100,9 +102,7 @@ const createAdvertisement = function() {
 }
 
 const getAdvertisements = function(quantity) {
-  return new Array(quantity).fill(null).map(() => {
-    return createAdvertisement();
-  });
+  return new Array(quantity).fill(null).map(createAdvertisement);
 };
 
 // eslint-disable-next-line no-console
