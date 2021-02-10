@@ -48,8 +48,8 @@ console.log(getRandomIntInclusive(-1.2332, 50.3234));
 // eslint-disable-next-line no-console
 console.log(getRandomFloatInclusive(100.23434, 100.23434, 3));
 
-const getRandomArrayElement = function(array) {
-  return array[getRandomIntInclusive(0, array.length - 1)];
+const getRandomArrayElement = function(arrayElements) {
+  return arrayElements[getRandomIntInclusive(0, arrayElements.length - 1)];
 }
 
 const shuffle = function (arrayElements) {
