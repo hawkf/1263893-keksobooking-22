@@ -1,6 +1,6 @@
 import {getRandomIntInclusive, shuffle, getRandomArrayElement, getRandomFloatInclusive} from './util.js';
 
-const QUNTITY = 10;
+
 const HOUSE_TYPE = ['palace', 'flat', 'house', 'bungalow'];
 const X_COORDINATES = {
   min: 35.65000,
@@ -61,8 +61,5 @@ const createAdvertisement = function() {
 const getAdvertisements = function(quantity) {
   return new Array(quantity).fill(null).map(createAdvertisement);
 };
-
-// eslint-disable-next-line no-console
-console.log(getAdvertisements(QUNTITY));
 
 export {getAdvertisements}

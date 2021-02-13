@@ -1,4 +1,6 @@
 import {getAdvertisements} from './data.js';
 
+const QUNTITY = 10;
+
 // eslint-disable-next-line no-console
-console.log(getAdvertisements(10));
+console.log(getAdvertisements(QUNTITY));
