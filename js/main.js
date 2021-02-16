@@ -1,4 +1,6 @@
 import {getAdvertisements} from './data.js';
+import './popup.js'
+
 
 const QUNTITY = 10;
 
