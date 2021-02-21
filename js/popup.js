@@ -93,7 +93,7 @@ const makeAdvertisement = function ({author, offer}) {
   photos.removeChild(photoElement);
   photos.appendChild(createPhotosElements(offer.photos, photoElement));
   advertisementElement.querySelector('.popup__avatar').src = author.avatar;
-  map.appendChild(advertisementElement);
+  return advertisementElement;
 };
 
 export {makeAdvertisement};
