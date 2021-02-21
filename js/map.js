@@ -50,7 +50,6 @@ const addMainPin = function () {
   setAdress({lat: 35.68, lng: 139.69});
   mainPinMarker.on('moveend', (evt) => {
     setAdress(evt.target.getLatLng());
-    console.log(evt.target.getLatLng());
   })
 }
 
