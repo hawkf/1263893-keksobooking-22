@@ -48,7 +48,7 @@ const addMainPin = function () {
   mainPinMarker.addTo(map);
 
   setAdress({lat: 35.68, lng: 139.69});
-  mainPinMarker.on('moveend', (evt) => {
+  mainPinMarker.on('move', (evt) => {
     setAdress(evt.target.getLatLng());
   })
 }
