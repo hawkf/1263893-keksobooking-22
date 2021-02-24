@@ -3,6 +3,13 @@ import {deactivationAdForm, activationAdForm, setAdress} from './ad-form.js';
 import {deactivationMapFilters, activationMapFilters} from './map__filters.js';
 import {makeAdvertisement} from './popup.js';
 
+const LATITUDE = 35.68;
+const LONGITUDE = 139.69;
+const ICON_WIDTH = 52;
+const ICON_HEIGHT = 52;
+const ICON_ANCHOR_X = 26;
+const ICON_ANCHOR_Y = 52;
+
 const map = L.map('map-canvas');
 
 const loadMap = function (latValue, lngValue) {
@@ -30,14 +37,14 @@ const loadMap = function (latValue, lngValue) {
 const addMainPin = function () {
   const mainPinIcon = L.icon({
     iconUrl: '/img/main-pin.svg',
-    iconSize: [52, 52],
-    iconAnchor: [26, 52],
+    iconSize: [ICON_WIDTH, ICON_HEIGHT],
+    iconAnchor: [ICON_ANCHOR_X, ICON_ANCHOR_Y],
   });
 
   const mainPinMarker = L.marker (
     {
-      lat: 35.68,
-      lng: 139.69,
+      lat: LATITUDE,
+      lng: LONGITUDE,
     },
     {
       draggable: true,
@@ -47,7 +54,7 @@ const addMainPin = function () {
 
   mainPinMarker.addTo(map);
 
-  setAdress({lat: 35.68, lng: 139.69});
+  setAdress({lat: LATITUDE, lng: LONGITUDE});
   mainPinMarker.on('move', (evt) => {
     setAdress(evt.target.getLatLng());
   })
@@ -57,8 +64,8 @@ const addPin = function ({author, offer, location}) {
   const pinIcon = L.icon(
     {
       iconUrl: '/img/pin.svg',
-      iconSize: [52, 52],
-      iconAnchor: [26, 52],
+      iconSize: [ICON_WIDTH, ICON_HEIGHT],
+      iconAnchor: [ICON_ANCHOR_X, ICON_ANCHOR_Y],
     });
 
   const pinMarker = L.marker(
