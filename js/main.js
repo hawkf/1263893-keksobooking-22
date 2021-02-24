@@ -1,9 +1,18 @@
 import {getAdvertisements} from './data.js';
-import {makeAdvertisement} from './popup.js';
+import {loadMap, addMainPin, addPin} from './map.js';
+
 
 const QUNTITY = 10;
+const LATITUDE = 35.68;
+const LONGITUDE = 139.69;
 
-// eslint-disable-next-line no-console
-console.log(getAdvertisements(QUNTITY));
-const advertisment = getAdvertisements(QUNTITY)[0];
-makeAdvertisement(advertisment);
+const advertisements = getAdvertisements(QUNTITY)
+
+loadMap(LATITUDE, LONGITUDE);
+addMainPin();
+advertisements.forEach((advertisement) => {
+  addPin(advertisement);
+})
+
+
+
