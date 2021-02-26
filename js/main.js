@@ -1,18 +1,27 @@
-import {getAdvertisements} from './data.js';
-import {loadMap, addMainPin, addPin} from './map.js';
+import {loadMap, addMainPin, addPins} from './map.js';
+import {getData} from './api.js';
+import {showAlert, showSuccessMessage} from './util.js';
+import {resetMapFilters} from './map__filters.js';
+import {resetForm, setAdFormSubmit} from './ad-form.js';
 
 
-const QUNTITY = 10;
+
 const LATITUDE = 35.68;
 const LONGITUDE = 139.69;
 
-const advertisements = getAdvertisements(QUNTITY)
-
 loadMap(LATITUDE, LONGITUDE);
 addMainPin();
-advertisements.forEach((advertisement) => {
-  addPin(advertisement);
-})
+getData((advertisments) => {
+  addPins(advertisments);
+}, (message) => {
+  showAlert(message);
+});
+
+// eslint-disable-next-line no-console
+getData();
+resetForm(resetMapFilters);
+setAdFormSubmit(showSuccessMessage);
+//showSuccessMessage();
 
 
 

@@ -17,4 +17,8 @@ const activationMapFilters = function() {
   }
 }
 
-export {deactivationMapFilters, activationMapFilters}
+const resetMapFilters = () => {
+  mapFilter.reset();
+}
+
+export {deactivationMapFilters, activationMapFilters, resetMapFilters}

@@ -32,7 +32,15 @@ const loadMap = function (latValue, lngValue) {
 
 }
 
-
+const mainPinMarker = L.marker (
+  {
+    lat: LATITUDE,
+    lng: LONGITUDE,
+  },
+  {
+    draggable: true,
+  },
+);
 
 const addMainPin = function () {
   const mainPinIcon = L.icon({
@@ -41,17 +49,7 @@ const addMainPin = function () {
     iconAnchor: [ICON_ANCHOR_X, ICON_ANCHOR_Y],
   });
 
-  const mainPinMarker = L.marker (
-    {
-      lat: LATITUDE,
-      lng: LONGITUDE,
-    },
-    {
-      draggable: true,
-      icon: mainPinIcon,
-    },
-  );
-
+  mainPinMarker.setIcon(mainPinIcon);
   mainPinMarker.addTo(map);
 
   setAdress({lat: LATITUDE, lng: LONGITUDE});
@@ -60,32 +58,41 @@ const addMainPin = function () {
   })
 }
 
-const addPin = function ({author, offer, location}) {
-  const pinIcon = L.icon(
-    {
-      iconUrl: '/img/pin.svg',
-      iconSize: [ICON_WIDTH, ICON_HEIGHT],
-      iconAnchor: [ICON_ANCHOR_X, ICON_ANCHOR_Y],
-    });
-
-  const pinMarker = L.marker(
-    {
-      lat: location.x,
-      lng: location.y,
-    },
-    {
-      draggable: true,
-      icon: pinIcon,
-    });
-
-  pinMarker
-    .addTo(map)
-    .bindPopup(
-      makeAdvertisement({author, offer}),
-      {
-        keepInView: true,
-      });
+const setDefaultMainPinMarker  = () => {
+  mainPinMarker.setLatLng({lat: LATITUDE, lng: LONGITUDE});
+  setAdress({lat: LATITUDE, lng: LONGITUDE});
 }
 
-export {loadMap, addMainPin, addPin}
+const addPins = function (advertisments) {
+  // eslint-disable-next-line no-console
+  console.log(advertisments);
+  advertisments.forEach(({author, offer, location}) =>
+  {
+    const pinIcon = L.icon(
+      {
+        iconUrl: '/img/pin.svg',
+        iconSize: [ICON_WIDTH, ICON_HEIGHT],
+        iconAnchor: [ICON_ANCHOR_X, ICON_ANCHOR_Y],
+      });
 
+    const pinMarker = L.marker(
+      {
+        lat: location.lat,
+        lng: location.lng,
+      },
+      {
+        draggable: true,
+        icon: pinIcon,
+      });
+
+    pinMarker
+      .addTo(map)
+      .bindPopup(
+        makeAdvertisement({author, offer}),
+        {
+          keepInView: true,
+        });
+  });
+}
+
+export {loadMap, addMainPin, setDefaultMainPinMarker, addPins}
