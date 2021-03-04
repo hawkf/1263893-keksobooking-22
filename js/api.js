@@ -10,7 +10,7 @@ const getData = function (onSuccess, onError) {
 }
 
 const sendData = function (onSuccess, onError, body)  {
-  fetch(' https://22.javascript.pages.academy/keksobooking',
+  fetch('https://22.javascript.pages.academy/keksobooking',
     {
       method: 'POST',
       type: 'multipart/form-data',
@@ -27,6 +27,7 @@ const sendData = function (onSuccess, onError, body)  {
     .catch((err) => {
       onError(err);
     })
+
 }
 
 export {getData, sendData}

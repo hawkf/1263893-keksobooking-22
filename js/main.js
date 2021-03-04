@@ -17,8 +17,7 @@ getData((advertisments) => {
   showAlert(message);
 });
 
-// eslint-disable-next-line no-console
-getData();
+
 resetForm(resetMapFilters);
 setAdFormSubmit(showSuccessMessage);
 //showSuccessMessage();
