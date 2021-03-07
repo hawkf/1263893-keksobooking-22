@@ -1,4 +1,4 @@
-const ALERT_SHOW_TIME = 4000;
+//const ALERT_SHOW_TIME = 4000;
 
 const getRandomIntInclusive = function (min, max) {
   if (min > max) {
@@ -42,31 +42,9 @@ const shuffle = function (arrayElements) {
   return results;
 }
 
-const showAlert = function(message) {
-  const alertContainer = document.createElement('div');
-  alertContainer.style.zIndex = 100
-  alertContainer.style.position = 'absolute';
-  alertContainer.style.left = 0;
-  alertContainer.style.right = 0;
-  alertContainer.style.top = 0;
-  alertContainer.style.padding = '10px, 3px';
-  alertContainer.style.fontSize = '30px';
-  alertContainer.style.textAlign = 'center';
-  alertContainer.style.backgroundColor = 'red';
-
-  alertContainer.textContent = message;
-  document.querySelector('body').appendChild(alertContainer);
-
-  setTimeout(() => {
-    alertContainer.remove();
-  }, ALERT_SHOW_TIME);
+const isEscEvent = function (evt) {
+  return evt.key === ('Escape' || 'Esc');
 }
 
-const showSuccessMessage = () => {
-  const successMessage = document.querySelector('#success')
-    .content
-    .querySelector('.success');
-  document.querySelector('main').appendChild(successMessage.cloneNode(true));
-}
 
-export {getRandomIntInclusive, shuffle, getRandomArrayElement, getRandomFloatInclusive, showAlert, showSuccessMessage};
+export {getRandomIntInclusive, shuffle, getRandomArrayElement, getRandomFloatInclusive, isEscEvent};

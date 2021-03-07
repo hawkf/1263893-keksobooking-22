@@ -5,6 +5,7 @@ import {makeAdvertisement} from './popup.js';
 
 const LATITUDE = 35.68;
 const LONGITUDE = 139.69;
+const SCALE = 10;
 const ICON_WIDTH = 52;
 const ICON_HEIGHT = 52;
 const ICON_ANCHOR_X = 26;
@@ -22,7 +23,7 @@ const loadMap = function (latValue, lngValue) {
     .setView({
       lat: latValue,
       lng: lngValue,
-    }, 10);
+    }, SCALE);
   L.tileLayer(
     'https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png',
     {

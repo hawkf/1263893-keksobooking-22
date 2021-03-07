@@ -1,8 +1,7 @@
 import {loadMap, addMainPin, addPins} from './map.js';
 import {getData} from './api.js';
-import {showAlert, showSuccessMessage} from './util.js';
-import {resetMapFilters} from './map__filters.js';
-import {resetForm, setAdFormSubmit} from './ad-form.js';
+import {showAlert, showSuccessMessage, showErrorMessage} from './message.js';
+import {setAdFormSubmit} from './ad-form.js';
 
 
 
@@ -17,10 +16,4 @@ getData((advertisments) => {
   showAlert(message);
 });
 
-
-resetForm(resetMapFilters);
-setAdFormSubmit(showSuccessMessage);
-//showSuccessMessage();
-
-
-
+setAdFormSubmit(showSuccessMessage, showErrorMessage);

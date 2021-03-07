@@ -1,6 +1,6 @@
 import {sendData} from './api.js';
-import {showAlert} from './util.js';
 import {setDefaultMainPinMarker} from './map.js';
+import {resetMapFilters} from './map__filters.js';
 
 
 const adForm = document.querySelector('.ad-form');
@@ -27,28 +27,30 @@ const activationAdForm = function() {
   adresInput.setAttribute('readonly', 'readonly');
 }
 
-const resetForm = (resetMapFilters) => {
-  resetButton.addEventListener('click', (evt) => {
-    evt.preventDefault();
-    adForm.reset();
-    resetMapFilters();
-    setDefaultMainPinMarker();
-  })
+const resetForm = () => {
+  adForm.reset();
+  resetMapFilters();
+  setDefaultMainPinMarker();
 }
+
+resetButton.addEventListener('click', (evt) => {
+  evt.preventDefault();
+  resetForm();
+})
 
 const setAdress = function ({lat, lng}) {
   adresInput.value = lat.toFixed(5) + ', ' + lng.toFixed(5);
 }
 
-const setAdFormSubmit = (onSuccess) => {
+const setAdFormSubmit = (onSuccess, onError) => {
   adForm.addEventListener('submit', (evt) => {
     evt.preventDefault();
 
     sendData(
       () => onSuccess(),
-      () => showAlert('Не удалось отправить форму'),
+      () => onError(),
       new FormData(evt.target),
-    );
+    )
   });
 }
 

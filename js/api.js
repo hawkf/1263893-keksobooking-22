@@ -10,24 +10,27 @@ const getData = function (onSuccess, onError) {
 }
 
 const sendData = function (onSuccess, onError, body)  {
-  fetch('https://22.javascript.pages.academy/keksobooking',
+  fetch(
+    'https://22.javascript.pages.academy/keksobooking',
     {
       method: 'POST',
-      type: 'multipart/form-data',
+      //type: 'multipart/form-data',
       body: body,
     },
   )
-    .then((responce) => {
-      if(responce.ok) {
+    .then((response) => {
+      if(response.ok) {
         onSuccess();
+        return true;
       } else {
-        onError('Произошла ошибка при отправке почты')
+        onError();
       }
     })
-    .catch((err) => {
-      onError(err);
+    .catch(() => {
+      onError();
     })
 
+  return false;
 }
 
 export {getData, sendData}
