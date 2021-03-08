@@ -1,3 +1,5 @@
+//const ALERT_SHOW_TIME = 4000;
+
 const getRandomIntInclusive = function (min, max) {
   if (min > max) {
     [min, max] = [max, min]
@@ -40,4 +42,9 @@ const shuffle = function (arrayElements) {
   return results;
 }
 
-export {getRandomIntInclusive, shuffle, getRandomArrayElement, getRandomFloatInclusive};
+const isEscEvent = function (evt) {
+  return evt.key === ('Escape' || 'Esc');
+}
+
+
+export {getRandomIntInclusive, shuffle, getRandomArrayElement, getRandomFloatInclusive, isEscEvent};
