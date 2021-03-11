@@ -2,6 +2,7 @@
 import {deactivationAdForm, activationAdForm, setAdress} from './ad-form.js';
 import {deactivationMapFilters, activationMapFilters} from './map__filters.js';
 import {makeAdvertisement} from './popup.js';
+import {arrayCompare} from './util.js';
 
 const LATITUDE = 35.68;
 const LONGITUDE = 139.69;
@@ -10,8 +11,38 @@ const ICON_WIDTH = 52;
 const ICON_HEIGHT = 52;
 const ICON_ANCHOR_X = 26;
 const ICON_ANCHOR_Y = 52;
+const PINS_COUNT = 10;
 
 const map = L.map('map-canvas');
+const mapFilter = document.querySelector('.map__filters');
+
+
+
+const filterAdvertisment = function (offer) {
+  const housingType = mapFilter.querySelector('#housing-type');
+  const housingPrice = mapFilter.querySelector('#housing-price');
+  const housingRoom = mapFilter.querySelector('#housing-rooms');
+  const housingGuests = mapFilter.querySelector('#housing-guests')
+  const housingFeatures = Array.from(mapFilter.querySelectorAll('[name="features"]:checked')).map(cb => cb.value);
+
+  return (housingType.value === offer.type || housingType.value === 'any') &&
+    (housingPrice.value === getPriceRange(offer.price) || housingPrice.value === 'any') &&
+    (housingRoom.value === String(offer.rooms) || housingRoom.value === 'any') &&
+    (housingGuests.value === String(offer.guests) || housingGuests.value === 'any') &&
+    arrayCompare(offer.features, housingFeatures);
+}
+
+const getPriceRange = function (price) {
+  let priceRange;
+  if(price < 10000) {
+    priceRange = 'low';
+  } else if (price >= 10000 && price <= 50000) {
+    priceRange = 'middle'
+  } else {
+    priceRange = 'high'
+  }
+  return priceRange;
+}
 
 const loadMap = function (latValue, lngValue) {
   deactivationAdForm();
@@ -63,37 +94,49 @@ const setDefaultMainPinMarker  = () => {
   mainPinMarker.setLatLng({lat: LATITUDE, lng: LONGITUDE});
   setAdress({lat: LATITUDE, lng: LONGITUDE});
 }
+let markers = [];
 
 const addPins = function (advertisments) {
   // eslint-disable-next-line no-console
   console.log(advertisments);
-  advertisments.forEach(({author, offer, location}) =>
-  {
-    const pinIcon = L.icon(
-      {
-        iconUrl: '/img/pin.svg',
-        iconSize: [ICON_WIDTH, ICON_HEIGHT],
-        iconAnchor: [ICON_ANCHOR_X, ICON_ANCHOR_Y],
-      });
 
-    const pinMarker = L.marker(
-      {
-        lat: location.lat,
-        lng: location.lng,
-      },
-      {
-        draggable: true,
-        icon: pinIcon,
-      });
-
-    pinMarker
-      .addTo(map)
-      .bindPopup(
-        makeAdvertisement({author, offer}),
+  advertisments.filter((element) => filterAdvertisment(element.offer))
+    .slice(0, PINS_COUNT)
+    .forEach(({author, offer, location}) => {
+      const pinIcon = L.icon(
         {
-          keepInView: true,
+          iconUrl: '/img/pin.svg',
+          iconSize: [ICON_WIDTH, ICON_HEIGHT],
+          iconAnchor: [ICON_ANCHOR_X, ICON_ANCHOR_Y],
         });
-  });
+
+      const pinMarker = L.marker(
+        {
+          lat: location.lat,
+          lng: location.lng,
+        },
+        {
+          draggable: true,
+          icon: pinIcon,
+        });
+
+      markers.push(pinMarker);
+
+      pinMarker
+        .addTo(map)
+        .bindPopup(
+          makeAdvertisement({author, offer}),
+          {
+            keepInView: true,
+          });
+    });
 }
 
-export {loadMap, addMainPin, setDefaultMainPinMarker, addPins}
+const clearPinMarkers = function () {
+  markers.forEach((marker) => {
+    marker.remove();
+  })
+  markers = [];
+}
+
+export {loadMap, addMainPin, setDefaultMainPinMarker, addPins, clearPinMarkers}
