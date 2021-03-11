@@ -1,10 +1,5 @@
 const mapFilter = document.querySelector('.map__filters');
 const mapFilterElements = mapFilter.children;
-//const housingType = mapFilter.querySelector('#housing-type');
-const housingPrice = mapFilter.querySelector('#housing-price');
-const housingRoom = mapFilter.querySelector('#housing-rooms');
-const housingFeatures = mapFilter.querySelectorAll('[name="features"]');
-const housingGuests = mapFilter.querySelector('#housing-guests');
 
 const deactivationMapFilters = function() {
   mapFilter.classList.add('map__filters--disabled');
@@ -29,23 +24,6 @@ const resetMapFilters = () => {
 const setMapFiltersChange = function (cb) {
   mapFilter.addEventListener('click', () => {
     cb();
-  });
-  housingPrice.addEventListener('click', () => {
-    cb();
-  });
-  housingRoom.addEventListener('click', () => {
-    cb();
-  });
-
-
-  housingGuests.addEventListener('click', () => {
-    cb();
-  });
-
-  housingFeatures.forEach((element) => {
-    element.addEventListener('click', () => {
-      cb();
-    });
   });
 }
 

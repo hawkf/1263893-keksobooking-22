@@ -1,8 +1,7 @@
 /*global L:readonly*/
 import {deactivationAdForm, activationAdForm, setAdress} from './ad-form.js';
-import {deactivationMapFilters, activationMapFilters} from './map__filters.js';
+import {deactivationMapFilters, activationMapFilters} from './map-filters.js';
 import {makeAdvertisement} from './popup.js';
-import {arrayCompare} from './util.js';
 
 const LATITUDE = 35.68;
 const LONGITUDE = 139.69;
@@ -17,6 +16,19 @@ const map = L.map('map-canvas');
 const mapFilter = document.querySelector('.map__filters');
 
 
+const arrayCompare = function (offerElements, features) {
+  if(offerElements.length === 0 && features.length > 0) {
+    return false;
+  }
+  for(let i  = 0; i < features.length; i++) {
+    for(let j = 0; j < offerElements.length; j++) {
+      if(offerElements.indexOf(features[i]) === -1) {
+        return false;
+      }
+    }
+  }
+  return true;
+}
 
 const filterAdvertisment = function (offer) {
   const housingType = mapFilter.querySelector('#housing-type');

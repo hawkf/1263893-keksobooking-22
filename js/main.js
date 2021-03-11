@@ -4,7 +4,7 @@ import {loadMap, addMainPin, addPins, clearPinMarkers} from './map.js';
 import {getData} from './api.js';
 import {showAlert, showSuccessMessage, showErrorMessage} from './message.js';
 import {setAdFormSubmit} from './ad-form.js';
-import {setMapFiltersChange} from './map__filters.js';
+import {setMapFiltersChange} from './map-filters.js';
 import './prewiev.js';
 
 

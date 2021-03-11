@@ -1,6 +1,6 @@
 import {sendData} from './api.js';
 import {setDefaultMainPinMarker} from './map.js';
-import {resetMapFilters} from './map__filters.js';
+import {resetMapFilters} from './map-filters.js';
 
 
 const adForm = document.querySelector('.ad-form');

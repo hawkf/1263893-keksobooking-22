@@ -42,23 +42,9 @@ const shuffle = function (arrayElements) {
   return results;
 }
 
-const arrayCompare = function (offerArray, features) {
-  if(offerArray.length === 0 & features.length > 0) {
-    return false;
-  }
-  for(let i  = 0; i < features.length; i++) {
-    for(let j = 0; j < offerArray.length; j++) {
-      if(offerArray.indexOf(features[i]) === -1) {
-        return false;
-      }
-    }
-  }
-  return true;
-}
-
 const isEscEvent = function (evt) {
   return evt.key === ('Escape' || 'Esc');
 }
 
 
-export {getRandomIntInclusive, shuffle, getRandomArrayElement, getRandomFloatInclusive, isEscEvent, arrayCompare};
+export {getRandomIntInclusive, shuffle, getRandomArrayElement, getRandomFloatInclusive, isEscEvent};
