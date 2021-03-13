@@ -21,4 +21,10 @@ const resetMapFilters = () => {
   mapFilter.reset();
 }
 
-export {deactivationMapFilters, activationMapFilters, resetMapFilters}
+const setMapFiltersChange = function (cb) {
+  mapFilter.addEventListener('change', () => {
+    cb();
+  });
+}
+
+export {deactivationMapFilters, activationMapFilters, resetMapFilters, setMapFiltersChange}
