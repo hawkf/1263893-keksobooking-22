@@ -109,9 +109,6 @@ const setDefaultMainPinMarker  = () => {
 let markers = [];
 
 const addPins = function (advertisments) {
-  // eslint-disable-next-line no-console
-  console.log(advertisments);
-
   advertisments.filter((element) => filterAdvertisment(element.offer))
     .slice(0, PINS_COUNT)
     .forEach(({author, offer, location}) => {

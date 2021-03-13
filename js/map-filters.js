@@ -22,7 +22,7 @@ const resetMapFilters = () => {
 }
 
 const setMapFiltersChange = function (cb) {
-  mapFilter.addEventListener('click', () => {
+  mapFilter.addEventListener('change', () => {
     cb();
   });
 }
