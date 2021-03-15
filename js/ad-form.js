@@ -104,23 +104,37 @@ price.addEventListener('input', () => {
   price.reportValidity();
 });
 
-capacity.addEventListener('change', () => {
-  if(roomNumber.value === '1' && capacity.value !== '1') {
-    capacity.setCustomValidity('1 комната — «для 1 гостя»');
-    capacity.value = '1';
-  } else if(roomNumber.value === '2' && capacity.value === '3' || capacity.value === '0') {
-    capacity.setCustomValidity('2 комнаты — «для 2 гостей» или «для 1 гостя»');
-    capacity.value = '1';
-  } else if(roomNumber.value === '3' && capacity.value === '0') {
-    capacity.setCustomValidity('3 комнаты — «для 3 гостей», «для 2 гостей» или «для 1 гостя»');
-    capacity.value = '1';
-  } else if(roomNumber.value === '100' && capacity.value !== '0') {
-    capacity.setCustomValidity('100 комнат — «не для гостей»');
-    capacity.value = '0';
-  } else {
-    capacity.setCustomValidity('');
-  }
-  capacity.reportValidity();
+capacity.addEventListener('click', () => {
+  setValidCapacity();
 })
+
+roomNumber.addEventListener('click', () => {
+  setValidCapacity();
+});
+
+const setValidCapacity = function () {
+  if(roomNumber.value === '1') {
+    capacity.querySelector('[value = "1"]').disabled = false;
+    capacity.querySelector('[value = "2"]').disabled = true;
+    capacity.querySelector('[value = "3"]').disabled = true;
+    capacity.querySelector('[value = "0"]').disabled = true;
+  }else if(roomNumber.value === '2') {
+    capacity.querySelector('[value = "1"]').disabled = false;
+    capacity.querySelector('[value = "2"]').disabled = false;
+    capacity.querySelector('[value = "3"]').disabled = true;
+    capacity.querySelector('[value = "0"]').disabled = true;
+
+  } else if(roomNumber.value === '3') {
+    capacity.querySelector('[value = "1"]').disabled = false;
+    capacity.querySelector('[value = "2"]').disabled = false;
+    capacity.querySelector('[value = "3"]').disabled = false;
+    capacity.querySelector('[value = "0"]').disabled = true;
+  } else if(roomNumber.value === '100') {
+    capacity.querySelector('[value = "1"]').disabled = true;
+    capacity.querySelector('[value = "2"]').disabled = true;
+    capacity.querySelector('[value = "3"]').disabled = true;
+    capacity.querySelector('[value = "0"]').disabled = false;
+  }
+}
 
 export {deactivationAdForm, activationAdForm, setAdress, setAdFormSubmit, resetForm};
