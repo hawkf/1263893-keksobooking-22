@@ -4,6 +4,7 @@ import {resetMapFilters} from './map-filters.js';
 
 
 const adForm = document.querySelector('.ad-form');
+const adFormSubmitButton = adForm.querySelector('.ad-form__submit');
 const formElements = adForm.querySelectorAll('fieldset');
 const adresInput = document.querySelector('#address');
 const resetButton = document.querySelector('.ad-form__reset');
@@ -57,7 +58,7 @@ const setAdress = function ({lat, lng}) {
 
 const setAdFormSubmit = (onSuccess, onError) => {
   adForm.addEventListener('submit', (evt) => {
-    //evt.preventDefault();
+    evt.preventDefault();
 
     sendData(
       () => onSuccess(),
@@ -106,7 +107,7 @@ price.addEventListener('input', () => {
 
 capacity.addEventListener('click', () => {
   setValidCapacity();
-})
+});
 
 roomNumber.addEventListener('click', () => {
   setValidCapacity();
@@ -135,6 +136,17 @@ const setValidCapacity = function () {
     capacity.querySelector('[value = "3"]').disabled = true;
     capacity.querySelector('[value = "0"]').disabled = false;
   }
-}
+};
+
+adFormSubmitButton.addEventListener('click', () => {
+  const inputs = adForm.querySelectorAll('input');
+  for(let i = 0; i < inputs.length; i++) {
+    if(inputs[i].checkValidity() === false) {
+      inputs[i].style.outline = 'solid red 2px';
+    } else {
+      inputs[i].style.outline = 'none';
+    }
+  }
+});
 
 export {deactivationAdForm, activationAdForm, setAdress, setAdFormSubmit, resetForm};
