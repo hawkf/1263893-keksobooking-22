@@ -114,27 +114,99 @@ roomNumber.addEventListener('click', () => {
 });
 
 const setValidCapacity = function () {
+  const capacityOptions = capacity.querySelectorAll('option');
   if(roomNumber.value === '1') {
-    capacity.querySelector('[value = "1"]').disabled = false;
-    capacity.querySelector('[value = "2"]').disabled = true;
-    capacity.querySelector('[value = "3"]').disabled = true;
-    capacity.querySelector('[value = "0"]').disabled = true;
+    for(let i = 0; i < capacityOptions.length; i++) {
+      switch (capacityOptions[i].value) {
+        case '1' :
+          capacityOptions[i].disabled = false;
+          break;
+        case '2' :
+          capacityOptions[i].disabled = true;
+          if(capacityOptions[i].selected === true) {
+            capacityOptions[i].selected = false;
+          }
+          break;
+        case '3' :
+          capacityOptions[i].disabled = true;
+          if(capacityOptions[i].selected === true) {
+            capacityOptions[i].selected = false;
+          }
+          break;
+        case '0' :
+          capacityOptions[i].disabled = true;
+          if(capacityOptions[i].selected === true) {
+            capacityOptions[i].selected = false;
+          }
+      }
+    }
   }else if(roomNumber.value === '2') {
-    capacity.querySelector('[value = "1"]').disabled = false;
-    capacity.querySelector('[value = "2"]').disabled = false;
-    capacity.querySelector('[value = "3"]').disabled = true;
-    capacity.querySelector('[value = "0"]').disabled = true;
-
+    for(let i = 0; i < capacityOptions.length; i++) {
+      switch (capacityOptions[i].value) {
+        case '1' :
+          capacityOptions[i].disabled = false;
+          break;
+        case '2' :
+          capacityOptions[i].disabled = false;
+          break;
+        case '3' :
+          capacityOptions[i].disabled = true;
+          if(capacityOptions[i].selected === true) {
+            capacityOptions[i].selected = false;
+          }
+          break;
+        case '0' :
+          capacityOptions[i].disabled = true;
+          if(capacityOptions[i].selected === true) {
+            capacityOptions[i].selected = false;
+          }
+      }
+    }
   } else if(roomNumber.value === '3') {
-    capacity.querySelector('[value = "1"]').disabled = false;
-    capacity.querySelector('[value = "2"]').disabled = false;
-    capacity.querySelector('[value = "3"]').disabled = false;
-    capacity.querySelector('[value = "0"]').disabled = true;
+    for(let i = 0; i < capacityOptions.length; i++) {
+      switch (capacityOptions[i].value) {
+        case '1' :
+          capacityOptions[i].disabled = false;
+          break;
+        case '2' :
+          capacityOptions[i].disabled = false;
+          break;
+        case '3' :
+          capacityOptions[i].disabled = false;
+          break;
+        case '0' :
+          capacityOptions[i].disabled = true;
+          if(capacityOptions[i].selected === true) {
+            capacityOptions[i].selected = false;
+          }
+      }
+    }
   } else if(roomNumber.value === '100') {
-    capacity.querySelector('[value = "1"]').disabled = true;
-    capacity.querySelector('[value = "2"]').disabled = true;
-    capacity.querySelector('[value = "3"]').disabled = true;
-    capacity.querySelector('[value = "0"]').disabled = false;
+    for(let i = 0; i < capacityOptions.length; i++) {
+      switch (capacityOptions[i].value) {
+        case '1' :
+          capacityOptions[i].disabled = true;
+          if(capacityOptions[i].selected === true) {
+            capacityOptions[i].selected = false;
+          }
+          break;
+        case '2' :
+          capacityOptions[i].disabled = true;
+          if(capacityOptions[i].selected === true) {
+            capacityOptions[i].selected = false;
+          }
+          break;
+        case '3' :
+          capacityOptions[i].disabled = true;
+          if(capacityOptions[i].selected === true) {
+            capacityOptions[i].selected = false;
+          }
+          break;
+        case '0' :
+          capacityOptions[i].disabled = false;
+          capacityOptions[i].selected = true;
+      }
+    }
   }
 };
 
