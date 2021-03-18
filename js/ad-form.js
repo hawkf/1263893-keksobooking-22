@@ -15,11 +15,17 @@ const timeOut = adForm.querySelector('#timeout')
 const titleInput = adForm.querySelector('#title');
 const roomNumber = adForm.querySelector('#room_number');
 const capacity = adForm.querySelector('#capacity');
+const capacityOptions = capacity.querySelectorAll('option');
 const priceMap = new Map();
 priceMap.set('flat', '1000');
 priceMap.set('bungalow', '0')
 priceMap.set('house', '5000');
 priceMap.set('palace', '10000');
+const capacityMap = new Map();
+capacityMap.set('1', ['1']);
+capacityMap.set('2', ['1', '2']);
+capacityMap.set('3', ['1', '2', '3']);
+capacityMap.set('100', ['0']);
 
 price.placeholder = priceMap.get(type.value);
 
@@ -70,6 +76,7 @@ const setAdFormSubmit = (onSuccess, onError) => {
 
 type.addEventListener('change', () => {
   price.placeholder = priceMap.get(type.value);
+  price.min = priceMap.get(type.value);
 } );
 
 timeIn.addEventListener('change', () => {
@@ -114,97 +121,16 @@ roomNumber.addEventListener('click', () => {
 });
 
 const setValidCapacity = function () {
-  const capacityOptions = capacity.querySelectorAll('option');
-  if(roomNumber.value === '1') {
-    for(let i = 0; i < capacityOptions.length; i++) {
-      switch (capacityOptions[i].value) {
-        case '1' :
-          capacityOptions[i].disabled = false;
-          break;
-        case '2' :
-          capacityOptions[i].disabled = true;
-          if(capacityOptions[i].selected === true) {
-            capacityOptions[i].selected = false;
-          }
-          break;
-        case '3' :
-          capacityOptions[i].disabled = true;
-          if(capacityOptions[i].selected === true) {
-            capacityOptions[i].selected = false;
-          }
-          break;
-        case '0' :
-          capacityOptions[i].disabled = true;
-          if(capacityOptions[i].selected === true) {
-            capacityOptions[i].selected = false;
-          }
+  for(let i = 0; i < capacityOptions.length; i++) {
+    if(capacityMap.get(roomNumber.value).includes(capacityOptions[i].value)) {
+      capacityOptions[i].disabled = false;
+      if(i === capacityOptions.length - 1) {
+        capacityOptions[i].selected = true;
       }
-    }
-  }else if(roomNumber.value === '2') {
-    for(let i = 0; i < capacityOptions.length; i++) {
-      switch (capacityOptions[i].value) {
-        case '1' :
-          capacityOptions[i].disabled = false;
-          break;
-        case '2' :
-          capacityOptions[i].disabled = false;
-          break;
-        case '3' :
-          capacityOptions[i].disabled = true;
-          if(capacityOptions[i].selected === true) {
-            capacityOptions[i].selected = false;
-          }
-          break;
-        case '0' :
-          capacityOptions[i].disabled = true;
-          if(capacityOptions[i].selected === true) {
-            capacityOptions[i].selected = false;
-          }
-      }
-    }
-  } else if(roomNumber.value === '3') {
-    for(let i = 0; i < capacityOptions.length; i++) {
-      switch (capacityOptions[i].value) {
-        case '1' :
-          capacityOptions[i].disabled = false;
-          break;
-        case '2' :
-          capacityOptions[i].disabled = false;
-          break;
-        case '3' :
-          capacityOptions[i].disabled = false;
-          break;
-        case '0' :
-          capacityOptions[i].disabled = true;
-          if(capacityOptions[i].selected === true) {
-            capacityOptions[i].selected = false;
-          }
-      }
-    }
-  } else if(roomNumber.value === '100') {
-    for(let i = 0; i < capacityOptions.length; i++) {
-      switch (capacityOptions[i].value) {
-        case '1' :
-          capacityOptions[i].disabled = true;
-          if(capacityOptions[i].selected === true) {
-            capacityOptions[i].selected = false;
-          }
-          break;
-        case '2' :
-          capacityOptions[i].disabled = true;
-          if(capacityOptions[i].selected === true) {
-            capacityOptions[i].selected = false;
-          }
-          break;
-        case '3' :
-          capacityOptions[i].disabled = true;
-          if(capacityOptions[i].selected === true) {
-            capacityOptions[i].selected = false;
-          }
-          break;
-        case '0' :
-          capacityOptions[i].disabled = false;
-          capacityOptions[i].selected = true;
+    } else  {
+      capacityOptions[i].disabled = true;
+      if (capacityOptions[i].selected === true) {
+        capacityOptions[i].selected = false;
       }
     }
   }
