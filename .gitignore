@@ -10,3 +10,5 @@ node_modules/
 npm-debug.log*
 Thumbs.db
 .vscode/
+build/js/main.bundle.js
+build/js/main.bundle.js.map
