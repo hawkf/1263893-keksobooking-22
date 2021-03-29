@@ -49,6 +49,8 @@ const activationAdForm = function() {
 
 const resetForm = () => {
   adForm.reset();
+  adForm.querySelector('.ad-form__photo').innerHTML ='';
+  adForm.querySelector('.ad-form-header__preview img').src = 'img/muffin-grey.svg';
   resetMapFilters();
   setDefaultMainPinMarker();
 }
